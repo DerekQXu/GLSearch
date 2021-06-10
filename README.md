@@ -14,4 +14,6 @@ To evaluate GLSearch on datasets with less than ten thousande nodes, please repl
 Datasets are specified in `config.py`.
 
 Once `config.py` is correctly set, run the below command:
-```python3 main.py```
+```
+python3 main.py
+```
