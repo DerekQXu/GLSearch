@@ -9,7 +9,9 @@ Mark `/model/OurMCS/` and `/src/` as the source directories.
 
 ## Datasets
 
-Place the required dataset `*.klepto` files under a new directory `/save/OurModelData/` (ex. `/save/OurModelData/aids700nef_..._None.klepto`).
+Get the datasets from: https://drive.google.com/drive/folders/1l7_WmO54gPHZ4YwzOqewZtZhWIxn44ZV?usp=sharing
+
+Place the `*.klepto` files under a new directory `/save/OurModelData/` (ex. `/save/OurModelData/aids700nef_..._None.klepto`).
 
 ## Run
 
