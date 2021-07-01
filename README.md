@@ -5,15 +5,27 @@ This repository is the PyTorch implementation of "GLSearch: Maximum Common Subgr
 
 Package requirements are in requirements.txt. Please install required packages and versions.
 
+Mark `/model/OurMCS/` and `/src/` as the source directories.
+
+## Datasets
+
+Place the required dataset klepto files under a new directory `/save/OurModelData/` (ex. `/save/OurModelData/aids700nef_..._None.klepto`).
+
 ## Run
 
-To evaluate GLSearch on scalable datasets, please replace `config.py` with `config_scalable.py`. 
+### Testing
 
-To evaluate GLSearch on datasets with less than ten thousande nodes, please replace `config.py` with `config_large.py`. 
+Select 1 of 3 desired dataset on `lines 62-77` of `model/OurMCS/config.py` by commenting out the rest.
 
-Datasets are specified in `config.py`.
+Run the below command:
+```
+python3 main.py
+```
+### Training
 
-Once `config.py` is correctly set, run the below command:
+Replace `config.py` with `config_training.py`.
+
+Run the below command:
 ```
 python3 main.py
 ```
