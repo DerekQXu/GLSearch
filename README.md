@@ -3,13 +3,13 @@ This repository is the PyTorch implementation of "GLSearch: Maximum Common Subgr
 
 ## Installation
 
-Package requirements are in requirements.txt. Please install required packages and versions.
+Package requirements are in `requirements.txt`. Please install required packages and versions.
 
 Mark `/model/OurMCS/` and `/src/` as the source directories.
 
 ## Datasets
 
-Place the required dataset klepto files under a new directory `/save/OurModelData/` (ex. `/save/OurModelData/aids700nef_..._None.klepto`).
+Place the required dataset `*.klepto` files under a new directory `/save/OurModelData/` (ex. `/save/OurModelData/aids700nef_..._None.klepto`).
 
 ## Run
 
