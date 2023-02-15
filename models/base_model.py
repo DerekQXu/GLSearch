@@ -7,5 +7,5 @@ class BaseModel(Module, ABC):
         self.opt = opt
 
     @abstractmethod
-    def forward(self):
+    def forward(self, x):
         pass

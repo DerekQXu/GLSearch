@@ -1,9 +1,8 @@
-from torch.utils.data import DataLoader
+from torch.utils.data import DataLoader, Dataset
 from abc import ABC, abstractmethod
-from base_dataset import BaseDataset
 
 class BaseDataLoader(ABC):
-    def __init__(self, opt, dataset: BaseDataset):
+    def __init__(self, opt, dataset: Dataset):
         super(BaseDataLoader, self).__init__()
         self.opt = opt
         self.dataset = dataset
