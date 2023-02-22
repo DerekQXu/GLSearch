@@ -1,2 +1,4 @@
 .venv/
 .idea
+data/klepto_files
+data/dataset_files/*
