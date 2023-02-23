@@ -2,14 +2,12 @@ from base_options import BaseOptions
 
 class TestOptions(BaseOptions):
     def initialize(self):
-        super().initialize(self)
+        super().initialize()
 
-        self.parser.add_argument('--test', required=True, type=str, help='test parameter')
-        
     def parse(self):
         super().parse()
         
-        self.opt.isTrain = False
+        self.opt.isTrain = 'test'
         
         return self.opt
 

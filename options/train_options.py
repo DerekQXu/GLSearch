@@ -1,14 +1,13 @@
-from base_options import BaseOptions
+from options.base_options import BaseOptions
 
 class TrainOptions(BaseOptions):
     def initialize(self):
-        super().initialize(self)
-        
-        self.parser.add_argument('--train', required=True, type=str, help='train parameter')
-        
+        super().initialize()
+
+
     def parse(self):
         super().parse()
         
-        self.opt.isTrain = True
+        self.opt.phase = 'train'
         
         return self.opt
