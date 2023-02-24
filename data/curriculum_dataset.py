@@ -49,6 +49,7 @@ class CurriculumDataset(BaseDataset):
         Merge a list of datasets
         """
         opt = dataset_list[0].opt
+        name = "generic name" # TODO insert correct name (maybe the number of curriculum, or the names of all datasets?)
 
         # For each dataset extract randomly <num_pairs> pairs and graphs
         gs_list, pairs_list = _get_dataset_list_contents(dataset_list, num_pairs_list)
@@ -57,11 +58,10 @@ class CurriculumDataset(BaseDataset):
         # merge the remaining attributes
         num_node_feat = dataset_list[0].num_node_features
         gid1gid2_list = torch.tensor(list(pairs_cum.keys()), device=opt.device)
-        # TODO create merged dataset
-        dataset = None
-        # dataset = Dataset()
+        dataset = Dataset(name, gs_cum, pairs_cum)
         return CurriculumDataset(dataset, gid1gid2_list, num_node_feat)
 
+# TODO add __str__ method
 
 # TODO call _get_filtered_pairs_and_gs_list directly?
 def _get_dataset_list_contents(dataset_list: List[CurriculumDataset], num_pairs_list: List[int]) -> (
