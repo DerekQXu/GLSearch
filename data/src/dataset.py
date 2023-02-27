@@ -2,6 +2,7 @@ from data.src.graph_pair import GraphPair
 from data.src.graph import Graph
 from typing import Dict, List, Tuple
 from collections import OrderedDict
+from utils.stats import generate_stat_line
 
 PairDict = Dict[Tuple[int, int], GraphPair]
 
@@ -46,7 +47,7 @@ class Dataset:
     def __str__(self):
         return generate_stat_line('Dataset', self.name) + \
             generate_stat_line('num_graphs', len(self.graphs)) + \
-            generate_stat_line('num_pairs', len(self.pairs)) + ' pairs'
+            generate_stat_line('num_pairs', len(self.pairs))
 
     def _gen_gs_map(self):
         rtn = {}
@@ -87,5 +88,4 @@ def _assert_nonempty_str(s):
     assert s is None or (s and type(s) is str)
 
 
-def generate_stat_line(name, value):
-    return f"{name}:\t {value}"
+

@@ -7,6 +7,7 @@ from data.src.dataset import Dataset, PairDict
 from data.src.graph_pair import GraphPair
 from data.src.graph import Graph
 from options import opt
+from utils.stats import generate_stat_line
 
 seed = random.Random(123)
 
@@ -39,8 +40,8 @@ class CurriculumDataset(BaseDataset):
         """
         new_dataset = CurriculumDataset(
             Dataset.from_legacy_dataset(legacy_dataset['dataset']),
-            legacy_dataset['num_node_feat'],
-            opt)
+            [],
+            legacy_dataset['num_node_feat'])
         return new_dataset
 
     @staticmethod
@@ -48,7 +49,6 @@ class CurriculumDataset(BaseDataset):
         """
         Merge a list of datasets
         """
-        opt = dataset_list[0].opt
         name = "generic name" # TODO insert correct name (maybe the number of curriculum, or the names of all datasets?)
 
         # For each dataset extract randomly <num_pairs> pairs and graphs
@@ -61,7 +61,9 @@ class CurriculumDataset(BaseDataset):
         dataset = Dataset(name, gs_cum, pairs_cum)
         return CurriculumDataset(dataset, gid1gid2_list, num_node_feat)
 
-# TODO add __str__ method
+    def __str__(self):
+        return self.dataset.__str__() + \
+                    generate_stat_line('Num node features', self.num_node_features)
 
 # TODO call _get_filtered_pairs_and_gs_list directly?
 def _get_dataset_list_contents(dataset_list: List[CurriculumDataset], num_pairs_list: List[int]) -> (

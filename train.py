@@ -3,7 +3,7 @@ from data.load_datasets import load_dataset_list
 
 def train():
     datasets = load_dataset_list(opt.dataset_list)
-    print(datasets)
+    print(str(datasets[0]))
 
 if __name__ == '__main__':
 
