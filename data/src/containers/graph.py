@@ -13,7 +13,16 @@ class Graph(nx.Graph):
         if not nx.is_connected(self):
             raise ValueError('Graph {} must be connected'.
                              format(self.graph['gid']))
+        origin_graph = args[0]
+        self.init_x = origin_graph.init_x
 
     def gid(self):
         return self.graph['gid']
+
+class HierarchicalGraph(Graph):
+    def __init__(self):
+        super(HierarchicalGraph, self).__init__()
+        # FIXME if we need to implement this, we need to integrate the implemetation of the following methods:
+        #   GraphPair.assign_g1_g2()
+        raise NotImplementedError()
 

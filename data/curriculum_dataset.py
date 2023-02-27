@@ -2,10 +2,8 @@ from __future__ import annotations
 
 import torch
 import random
-from data.base_dataset import BaseDataset
-from data.src.dataset import Dataset, PairDict
-from data.src.graph_pair import GraphPair
-from data.src.graph import Graph
+from .base_dataset import BaseDataset
+from .src.containers import Dataset, Graph, GraphPair
 from options import opt
 from utils.stats import generate_stat_line
 
@@ -26,12 +24,10 @@ class CurriculumDataset(BaseDataset):
         pass
 
     def __len__(self):
-        # TODO implement this
-        pass
+        return len(self.gid1gid2_list)
 
     def __getitem__(self, index):
-        # TODO implement this
-        pass
+        return self.gid1gid2_list[index]
 
     @staticmethod
     def from_legacy_dataset(legacy_dataset: Dict[str, any]) -> CurriculumDataset:

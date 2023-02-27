@@ -1,5 +1,5 @@
-from data.src.graph_pair import GraphPair
-from data.src.graph import Graph
+from .graph import Graph
+from .graph_pair import GraphPair
 from typing import Dict, List, Tuple
 from collections import OrderedDict
 from utils.stats import generate_stat_line
@@ -83,6 +83,22 @@ class Dataset:
         for g in self.graphs:
             assert isinstance(g, Graph)
 
+    def look_up_graph_by_gid(self, gid:int) -> Graph:
+        _id = self.gs_map.get(gid)
+        if _id is None:
+            raise ValueError('Cannot find graph w/ gid {} out of {} graphs'.format(
+                gid, len(self.gs_map)))
+        assert 0 <= _id < len(self.graphs)
+        return self.graphs[_id]
+
+    def look_up_pair_by_gids(self, gid1:int, gid2:int) -> GraphPair:
+        pair = self.pairs.get((gid1, gid2))
+        if pair is None:
+            pair = self.pairs.get((gid2, gid1))
+            if not pair:
+                raise ValueError('Cannot find ({},{}) out of {} pairs'.format(
+                    gid1, gid2, len(self.pairs)))
+        return pair
 
 def _assert_nonempty_str(s):
     assert s is None or (s and type(s) is str)

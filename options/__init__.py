@@ -9,14 +9,14 @@ caller = sys.argv[0].split(os.sep)[-1].split(".")[0]
 opt = None
 if caller == "train":
     from .train_options import TrainOptions
-    TrainOptions()
-    TrainOptions.initialize()
-    opt = TrainOptions.parse()
+    to = TrainOptions()
+    to.initialize()
+    opt = to.parse()
 elif caller == "test":
     from .test_options import TestOptions
-    TestOptions()
-    TestOptions.initialize()
-    opt = TestOptions.parse()
+    to = TestOptions()
+    to.initialize()
+    opt = to.parse()
 elif caller == "debug":
     from .debug_options import DebugOptions
     opt = DebugOptions()

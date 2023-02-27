@@ -5,7 +5,7 @@ import re
 from torch.utils.data import Dataset as TorchDataset
 import random
 import pickle
-from data.curriculum_dataset import CurriculumDataset
+from .curriculum_dataset import CurriculumDataset
 from options import opt
 
 
