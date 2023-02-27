@@ -1,4 +1,5 @@
 import networkx as nx
+import warnings
 
 class Graph(nx.Graph):
     """
@@ -18,6 +19,11 @@ class Graph(nx.Graph):
 
     def gid(self):
         return self.graph['gid']
+
+    def get_nxgraph(self):
+        # FIXME deprecated
+        warnings.warn("Graph.get_nxgraph() is deprecated, use Graph directly instead", DeprecationWarning)
+        return self
 
 class HierarchicalGraph(Graph):
     def __init__(self):
