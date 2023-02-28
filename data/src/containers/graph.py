@@ -28,7 +28,7 @@ class Graph(nx.Graph):
 class HierarchicalGraph(Graph):
     def __init__(self):
         super(HierarchicalGraph, self).__init__()
-        # FIXME if we need to implement this, we need to integrate the implemetation of the following methods:
+        # FIXME if we need to implement this, we need to integrate the implementation of the following methods:
         #   GraphPair.assign_g1_g2()
         raise NotImplementedError()
 

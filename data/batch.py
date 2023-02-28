@@ -90,7 +90,7 @@ def _convert_nx_to_pyg_graph(g: Graph) -> PyGSingleGraphData:
                        device=opt.device),
         edge_index=edge_index,
         edge_attr=None,
-        y=None)  # TODO: add one-hot
+        y=None)
     data, nf_dim = encode_node_features(pyg_single_g=data)
     assert data.is_undirected()
     assert data.x.shape[1] == nf_dim

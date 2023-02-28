@@ -46,8 +46,7 @@ class CurriculumDataset(BaseDataset):
         """
         Merge a list of datasets
         """
-        name = "generic name"  # TODO insert correct name (maybe the number of curriculum, or the names of all datasets?)
-
+        name = dataset_list[0].name + "_cur"  # the name is the name of the first dataset of the curriculum
         # For each dataset extract randomly <num_pairs> pairs and graphs
         gs_list, pairs_list = _get_filtered_pairs_and_gs_list(dataset_list, num_pairs_list)
         gs_cum, pairs_cum = _merge_gs_and_pairs(gs_list, pairs_list)
