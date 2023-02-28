@@ -35,7 +35,7 @@ class Dataset:
         legacy_pairs = legacy_dataset['pairs']
         pairs = {key: GraphPair.from_legacy_pair(legacy_pairs[key]) for key in legacy_pairs}
         graph_list = [Graph(legacy_dataset['gs'][i]) for i in range(len(legacy_dataset['gs']))]
-
+        #TODO possibly import glabel and see if it is used anywhere
         new_dataset = Dataset(
             legacy_dataset['name'],
             graph_list,
