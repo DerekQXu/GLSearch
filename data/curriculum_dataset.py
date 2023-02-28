@@ -9,6 +9,7 @@ from utils.stats import generate_stat_line
 
 seed = random.Random(123)
 
+
 class CurriculumDataset(BaseDataset):
     dataset: Dataset = None
     gid1gid2_list: torch.Tensor = None
@@ -45,10 +46,10 @@ class CurriculumDataset(BaseDataset):
         """
         Merge a list of datasets
         """
-        name = "generic name" # TODO insert correct name (maybe the number of curriculum, or the names of all datasets?)
+        name = "generic name"  # TODO insert correct name (maybe the number of curriculum, or the names of all datasets?)
 
         # For each dataset extract randomly <num_pairs> pairs and graphs
-        gs_list, pairs_list = _get_dataset_list_contents(dataset_list, num_pairs_list)
+        gs_list, pairs_list = _get_filtered_pairs_and_gs_list(dataset_list, num_pairs_list)
         gs_cum, pairs_cum = _merge_gs_and_pairs(gs_list, pairs_list)
 
         # merge the remaining attributes
@@ -59,17 +60,11 @@ class CurriculumDataset(BaseDataset):
 
     def __str__(self):
         return self.dataset.__str__() + \
-                    generate_stat_line('Num node features', self.num_node_features)
+            generate_stat_line('Num node features', self.num_node_features)
 
-# TODO call _get_filtered_pairs_and_gs_list directly?
-def _get_dataset_list_contents(dataset_list: List[CurriculumDataset], num_pairs_list: List[int]) -> (
-        List[PairDict], List[List[Graph]]):
-    pairs_list, gs_list = _get_filtered_pairs_and_gs_list(dataset_list,
-                                                               num_pairs_list)
-    return gs_list, pairs_list
 
 def _get_filtered_pairs_and_gs_list(dataset_list: List[CurriculumDataset], num_pairs_list: List[int]) -> (
-        List[PairDict], List[List[Graph]]):
+        List[List[Graph]], List[PairDict]):
     """For each dataset of the curriculum, randomly select <num_pairs> pairs and graphs"""
     pairs_list = []
     gs_list = []
@@ -77,7 +72,8 @@ def _get_filtered_pairs_and_gs_list(dataset_list: List[CurriculumDataset], num_p
         pairs, gs = _filter_pair_list(cur_dataset, num_pairs)
         pairs_list.append(pairs)
         gs_list.append(gs)
-    return pairs_list, gs_list
+    return gs_list, pairs_list
+
 
 def _filter_pair_list(cur_dataset: CurriculumDataset, num_pairs: int) -> (PairDict, List[Graph]):
     """
@@ -111,6 +107,7 @@ def _filter_pair_list(cur_dataset: CurriculumDataset, num_pairs: int) -> (PairDi
         _offset_pairs(pairs, pairs_filtered_unoffset, old_gid2new_gid)
     return pairs, gs
 
+
 def _offset_graphs(gs_cum: List[Graph], gs: List[Graph], offset) -> Tuple[Dict[int, int], int]:
     """Relabel the graph gids -> gid = 0, 1, 2, 3, ... """
     old_gid2new_gid = {}
@@ -123,12 +120,14 @@ def _offset_graphs(gs_cum: List[Graph], gs: List[Graph], offset) -> Tuple[Dict[i
     gs_cum.extend(gs)
     return old_gid2new_gid, offset
 
+
 def _offset_pairs(pairs_cum, pairs, old_gid2new_gid) -> None:
     for key, val in pairs.items():
         gid1, gid2 = key
         pairs_cum[(old_gid2new_gid[gid1], old_gid2new_gid[gid2])] = val
 
-def _merge_gs_and_pairs(gs_list:List[List[Graph]], pairs_list:List[PairDict]) -> (List[Graph], PairDict):
+
+def _merge_gs_and_pairs(gs_list: List[List[Graph]], pairs_list: List[PairDict]) -> (List[Graph], PairDict):
     """Merge the graphs and pairs from all datasets"""
     offset = 0
     gs_cum, pairs_cum = [], {}
