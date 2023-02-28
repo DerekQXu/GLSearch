@@ -5,6 +5,7 @@ class GraphPair:
     true_dict_list: List[Dict[int, int]]
     g1:Graph
     g2:Graph
+    duration:float
 
     # FIXME if we need attributes m and n, they are just the number_of_nodes() of g1 and g2, respectively.
 
@@ -37,3 +38,9 @@ class GraphPair:
                 raise ValueError('Shape mismatch! y_pred_mat shape {}; '
                                  'm, n: {} by {}'.
                                  format(y_pred_mat.shape, self.m, self.n))
+
+    def assign_pred_time(self, duration):
+        self.duration = duration
+
+    def get_pred_time(self):
+        return self.duration
