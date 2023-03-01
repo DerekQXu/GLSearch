@@ -35,13 +35,13 @@ def load_single_dataset(dataset_name: str) -> CurriculumDataset:
     """
     :param dataset_name: Base name of the dataset file
     """
-    # append phase to the name
-    dataset_name = dataset_name + '_' + opt.phase
+    dataset_name = dataset_name.split(":")[-1] # remove stuff before ":" (Because in windows the ":" is a weird symbol)
+    dataset_name = dataset_name + '_' + opt.phase # append phase to the name
 
     # search file in folder
     full_name = None
     for k in os.listdir(opt.data_folder):
-        if re.match(dataset_name, k):
+        if re.match(".*"+dataset_name, k):
             full_name = k
             break
     if full_name is None:

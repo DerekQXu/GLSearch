@@ -22,7 +22,7 @@ class CurriculumDataset(BaseDataset):
         self.gid1gid2_list = gid1gid2_list
         self.num_node_features = num_node_features
         self.opt = opt
-        pass
+        self.name = dataset.name
 
     def __len__(self):
         return len(self.gid1gid2_list)
