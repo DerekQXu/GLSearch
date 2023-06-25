@@ -862,7 +862,7 @@ class MCSRLBacktrack(nn.Module):
         recursion_thresh = (
                                        self.recursion_threshold is not None) and recursion_count > self.recursion_threshold
         timout_thresh = self.total_runtime is not None and timer.get_duration() > self.total_runtime
-        return recursion_thresh and timout_thresh
+        return recursion_thresh or timout_thresh
 
     def prune_condition(self, cur_state, action_space_data, incumbent,
                         search_stack, search_tree):
