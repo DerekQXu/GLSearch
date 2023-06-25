@@ -653,6 +653,9 @@ class MCSRLBacktrack(nn.Module):
         return bds_pruned
 
     def _get_empty_action_space_data(self, state):
+        state.exhausted_v = set()
+        state.exhausted_w = set()
+        state.pruned_actions = DoubleDict()
         natts2bds_unexhausted = state.get_natts2bds_unexhausted(with_bids=True)
         action_space_data = \
             ActionSpaceData(self._get_empty_action_space(), natts2bds_unexhausted, None)

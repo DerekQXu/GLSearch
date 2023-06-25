@@ -176,12 +176,14 @@ class StateNode(object):
         self.pruned_actions.add_lr(v, w)
         # if remove_nodes:
         for bd in unroll_bidomains(self.natts2bds):
-            if v in bd.left:
-                assert w in bd.right
-                if len(bd.right - self.pruned_actions.l2r[v]) == 0:
+            left_valid = bd.left - set(self.exhausted_v)
+            right_valid = bd.right - set(self.exhausted_w)
+            if v in left_valid:
+                assert w in right_valid
+                if len(right_valid - self.pruned_actions.l2r[v]) == 0:
                     self.exhausted_v.add(v)
                     self.recompute = True
-                if len(bd.left - self.pruned_actions.r2l[w]) == 0:
+                if len(left_valid - self.pruned_actions.r2l[w]) == 0:
                     self.exhausted_w.add(w)
                     self.recompute = True
 
